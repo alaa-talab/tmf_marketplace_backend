@@ -26,3 +26,13 @@ env/
 # OS
 .DS_Store
 Thumbs.db
+
+# Generated Schema Files
+db_schema.dot
+db_schema_dump.py
+
+# Sensitive/Local Files
+tmf_marketplace_postman_collection.json
+*.sqlite3
+*.pem
+.DS_Store
