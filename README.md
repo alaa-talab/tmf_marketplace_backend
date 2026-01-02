@@ -1,8 +1,8 @@
-# TMF Marketplace Backend 🚀
+# TMF Marketplace Backend 
 
 The backend API for the **TMF Marketplace**, a premium digital asset platform. Built with **Django Rest Framework (DRF)**.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 -   **Framework**: Django 6.0, Django Rest Framework
 -   **Database**: PostgreSQL (Production), SQLite (Dev)
@@ -10,7 +10,7 @@ The backend API for the **TMF Marketplace**, a premium digital asset platform. B
 -   **Storage**: AWS S3 (Media), WhiteNoise (Static)
 -   **Deployment**: Docker, Render.com
 
-## ⚡️ Quick Start
+##  Quick Start
 
 ### Prerequisites
 -   Python 3.10+
@@ -18,7 +18,8 @@ The backend API for the **TMF Marketplace**, a premium digital asset platform. B
 
 ### 1. Clone & Install
 ```bash
-git clone <your-backend-repo-url>
+git clone https://github.com/alaa-talab/tmf_marketplace_backend.git
+
 cd tmf_marketplace_backend
 
 # Create virtual environment
@@ -54,22 +55,48 @@ python manage.py runserver
 ```
 API will be available at `http://localhost:8000/api/`.
 
-## 🐳 Docker Support
+## Docker Support
 A `Dockerfile` is included for containerized deployment.
 ```bash
 docker build -t tmf-backend .
 docker run -p 8000:8000 tmf-backend
 ```
 
-## 🚀 Deployment (Render.com)
+## Deployment (Render.com)
 This repo includes `render.yaml` for zero-config deployment on Render.
 1.  Connect this repo to Render.
 2.  Select "Web Service".
 3.  Add environment variables used in `.env`.
 
-## 📚 API Documentation
+##  API Documentation
 -   **Auth**: `/api/auth/login/`, `/api/auth/register/`
 -   **Photos**: `/api/photos/` (List), `/api/photos/upload/` (Multipart)
 -   **Users**: `/api/users/profile/`
 
 **Note**: This project is configured to use AWS S3 for media storage. Ensure AWS credentials are set for image uploads to work.
+
+## 📊 Database Schema (ERD)
+
+![ERD Diagram](./erd_diagram.png)
+
+```mermaid
+erDiagram
+    User {
+        int id PK
+        string username
+        string email
+        string role "Uploader/Buyer"
+    }
+    Photo {
+        int id PK
+        string title
+        string description
+        date capture_date
+        string original_image
+        string watermarked_image
+        datetime created_at
+        int uploader_id FK
+    }
+
+    User ||--o{ Photo : "uploads"
+```
